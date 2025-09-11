@@ -42,6 +42,5 @@ labs(
     fill = "Epoetin Dose Quartile"
   ) 
 ```
-Insert figure caption in accordance with assignment here
 
-While this isn't the worlds most superior plot, it has significantly improved interpretability and aesthetics compared to the original. This is an example of the type of highly readable plot that can be generated using ggplot with relatively simple code. 
+This new plot clearly shows that both Hematocrit and Epoetin dose have an impact on patient mortality, and also appear to have a combined effect, especially at low hematocrit. While this isn't the worlds most superior plot, it has significantly improved interpretability and aesthetics compared to the original. This is an example of the type of highly readable plot that can be generated using ggplot with relatively simple code. 
