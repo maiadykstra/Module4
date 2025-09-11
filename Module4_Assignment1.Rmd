@@ -1,5 +1,31 @@
 ---
-title: "Module4_Assignment1"
+title: "Assignment 1: Fixing Poor Data Visualization"
+Author: "Maia Dykstra"
 output: html_document
 ---
 
+This assignment demonstrates the use of ggplot to created effective data visualizations in R. Below is a figure with less-than-deal data visualization.
+
+![](Bad graph 1.png)
+This figure [Cotter et al., (2004)](http://www.ncbi.nlm.nih.gov/pubmed/15528060?dopt=Abstract) shows 1-year mortality rate among patients separated by hematocrit (%) and quartile grouping by dose of epoetin received. The three dimensional aspect of the figure makes it difficult to read, the colours are somewhat jarring, and the mortality rate could be simplified to a percentage for ease of understanding. This figure was identified as one of the [top 10 worst published graphs](https://www.biostat.wisc.edu/~kbroman/topten_worstgraphs/) by a University of Wisconsin website. 
+
+## Fixing the Scary Graph ##
+
+The first step is to get the data into R. I've made estimates of the values shown in the figure for the sake of this exercise. I converted survival rates to percentages rather than per thousand, adressing one of the interpretation issues with the graph. Data is read from a .csv file using a function from the tidyverse library. 
+
+```{r}
+library(tidyverse)
+
+data <- read_csv("BadGraphData.csv")
+
+```
+
+Now I will generate a new figure using ggplot. A bar graph is still a good option, but a set of several successive sets of bars will be much easier to understand than the 3D plot. In the following code, ggplot generates a bar graph in which the x-axis is categorical bins for hematocrit percentage as used in the original plot. The y-axis shows mortality percentage, and the bars' fill color represents the quartile group for the dose of epoetin received. The 'position = "dodge" ' component places the x-axis results of the same bin next to each other instead of overlapping, and the 'stat = "identity"' component tells ggplot to use the entered mortality values rather than automatically calculated count values. 
+
+```{r}
+library(ggplot2)
+
+ggplot(data = data)+
+  geom_bar(mapping = aes(x = Hematocrit, y = Mortality, fill = Dose), position = "dodge", stat = "identity")
+
+```
