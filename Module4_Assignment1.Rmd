@@ -4,7 +4,7 @@ Author: "Maia Dykstra"
 output: html_document
 ---
 
-This assignment demonstrates the use of ggplot to created effective data visualizations in R. Below is a figure with less-than-deal data visualization.
+### This assignment demonstrates the use of ggplot to created effective data visualizations in R. Below is a figure with less-than-deal data visualization. ###
 
 ![](Bad graph 1.png)
 This figure [Cotter et al., (2004)](http://www.ncbi.nlm.nih.gov/pubmed/15528060?dopt=Abstract) shows 1-year mortality rate among patients separated by hematocrit (%) and quartile grouping by dose of epoetin received. The three dimensional aspect of the figure makes it difficult to read, the colours are somewhat jarring, and the mortality rate could be simplified to a percentage for ease of understanding. This figure was identified as one of the [top 10 worst published graphs](https://www.biostat.wisc.edu/~kbroman/topten_worstgraphs/) by a University of Wisconsin website. 
@@ -29,3 +29,19 @@ ggplot(data = data)+
   geom_bar(mapping = aes(x = Hematocrit, y = Mortality, fill = Dose), position = "dodge", stat = "identity")
 
 ```
+
+This new graph looks much better than the original, and fixes two of the three issues I identified (percentages for clarity, 2D instead of 3d structure), but the colours and labels can still be adjusted to improve the aesthetics and readability of this graph. The following code adds more appropriate labels to the axes and colour legend via the labs function. It also adjusts the colour theme of the fill to something less jarring than the original graph using the scale_fill_brewer function. This function changes the color scheme to a different set of values, a list of which can be found [here](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/).
+
+```{r}
+ggplot(data = data)+
+  geom_bar(mapping = aes(x = Hematocrit, y = Mortality, fill = Dose), position = "dodge", stat = "identity") +
+  scale_fill_brewer(palette = "Spectral") +
+labs(
+    x = "Hematocrit (%)",
+    y = " 1-Year Mortality Rate (%)",
+    fill = "Epoetin Dose Quartile"
+  ) 
+```
+Insert figure caption in accordance with assignment here
+
+While this isn't the worlds most superior plot, it has significantly improved interpretability and aesthetics compared to the original. This is an example of the type of highly readable plot that can be generated using ggplot with relatively simple code. 
